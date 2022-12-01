@@ -13,4 +13,9 @@
 
 .item {
     color: #fff;
+    text-decoration: none;
+}
+
+.item a.active {
+    color: #f0f;
 }

@@ -1,12 +1,20 @@
 import React from "react";
+import style from './postmessage.module.css'
 
 type MessagePostType = {
     message: string
+    likes: number
 }
 
 function PostMessage(props: MessagePostType) {
     return (
-        <div>{props.message}</div>
+        <div className={style.item}>
+                    <img src={'https://randomuser.me/api/portraits/men/60.jpg'} alt={'userpic'}/>
+                     {props.message}
+                     <div>
+                         <span>Like {props.likes}</span>
+                     </div>
+                 </div>
     )
 }
 
