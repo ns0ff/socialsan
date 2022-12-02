@@ -11,7 +11,7 @@
     background-color: bisque;
 }
 
-.item {
+.item a {
     color: #fff;
     text-decoration: none;
 }

@@ -2,12 +2,12 @@ import React from 'react';
 
 
 
- function News() {
-     return (
+function News() {
+    return (
         <div>
             News
         </div>
-     );
- }
+    );
+}
 
- export default News
+export default News

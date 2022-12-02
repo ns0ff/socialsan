@@ -5,22 +5,22 @@ import style from './navbar.module.css'
 function Navbar() {
     return (
         <nav className={style.nav}>
-             <div>
-                 <NavLink to='/profile'>Profile</NavLink>
-             </div>
-             <div>
-                 <NavLink to='/messages'>Messages</NavLink>
-             </div>
-             <div>
-                 <NavLink to='/news'>News</NavLink>
-             </div>
-             <div>
-                 <NavLink to='/music'>Music</NavLink>
-             </div>
-             <div>
-                 <NavLink to='/settings'>Settings</NavLink>
-             </div>
-         </nav>
+            <div className={style.item}>
+                <NavLink className={(navDate) => (navDate.isActive ? style.active : "")} to='/profile'>Profile</NavLink>
+            </div>
+            <div className={style.item}>
+                <NavLink className={(navDate) => (navDate.isActive ? style.active : "")} to='/messages'>Messages</NavLink>
+            </div>
+            <div className={style.item}>
+                <NavLink className={(navDate) => (navDate.isActive ? style.active : "")} to='/news'>News</NavLink>
+            </div>
+            <div className={style.item}>
+                <NavLink className={(navDate) => (navDate.isActive ? style.active : "")} to='/music'>Music</NavLink>
+            </div>
+            <div className={style.item}>
+                <NavLink className={(navDate) => (navDate.isActive ? style.active : "")} to='/settings'>Settings</NavLink>
+            </div>
+        </nav>
     );
 }
 

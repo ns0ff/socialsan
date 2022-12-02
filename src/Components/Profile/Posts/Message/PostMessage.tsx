@@ -9,12 +9,12 @@ type MessagePostType = {
 function PostMessage(props: MessagePostType) {
     return (
         <div className={style.item}>
-                    <img src={'https://randomuser.me/api/portraits/men/60.jpg'} alt={'userpic'}/>
-                     {props.message}
-                     <div>
-                         <span>Like {props.likes}</span>
-                     </div>
-                 </div>
+            <img src={'https://randomuser.me/api/portraits/men/60.jpg'} alt={'userpic'} />
+            {props.message}
+            <div>
+                <span>Like {props.likes}</span>
+            </div>
+        </div>
     )
 }
 

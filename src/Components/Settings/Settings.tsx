@@ -1,12 +1,12 @@
 import React from 'react';
 
 
- function Settings() {
-     return (
+function Settings() {
+    return (
         <div>
             Settings
         </div>
-     );
- }
+    );
+}
 
- export default Settings
+export default Settings
