@@ -12,7 +12,7 @@ function PostMessage(props: MessagePostType) {
             <img src={'https://randomuser.me/api/portraits/men/60.jpg'} alt={'userpic'} />
             {props.message}
             <div>
-                <span>Like {props.likes}</span>
+                <span>Likes: {props.likes}</span>
             </div>
         </div>
     )

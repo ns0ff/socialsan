@@ -11,7 +11,7 @@ function Posts() {
             </div>
             <div>
                 <PostMessage message="Hello world!" likes={15} />
-                <PostMessage message="Another post message" likes={54} />
+                <PostMessage message="Lorem ipsum dolor sit amet consectetur adipisicing." likes={54} />
             </div>
         </div>
     )

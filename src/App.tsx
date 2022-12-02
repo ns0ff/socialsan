@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from "react-router-dom";
 import './App.css';
-import Dialogs from './Components/Dialogs/Dialogs';
+import Conversations from './Components/Conversations/Conversations';
 import Header from "./Components/Header/Header";
 import Music from './Components/Music/Music';
 import Navbar from "./Components/Navbar/Navbar";
@@ -17,7 +17,7 @@ function App() {
       <div className="app-wrapper-content">
         <Routes>
           <Route path={'/profile'} element={<Profile />} />
-          <Route path={'/messages'} element={<Dialogs />} />
+          <Route path={'/messages'} element={<Conversations />} />
           <Route path={'/news'} element={<News />} />
           <Route path={'/music'} element={<Music />} />
           <Route path={'/settings'} element={<Settings />} />
