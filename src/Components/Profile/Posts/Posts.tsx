@@ -1,8 +1,12 @@
 import React from "react";
+import { ProfilePageType } from "../../../Redux/state";
 import PostMessage from "./Message/PostMessage";
 import style from './posts.module.css'
 
-function Posts() {
+
+function Posts(props: ProfilePageType) {
+    const postsElements = props.postData.map(el => <PostMessage id={el.id} message={el.message} likes={el.likes} />)
+
     return (
         <div>
             My posts:
@@ -11,8 +15,7 @@ function Posts() {
                 <button>Add post</button>
             </div>
             <div className={style.postBlock}>
-                <PostMessage message="Hello world!" likes={155} />
-                <PostMessage message="Lorem ipsum dolor sit amet consectetur adipisicing." likes={54} />
+                {postsElements}
             </div>
         </div>
     )

@@ -8,16 +8,19 @@ import Navbar from "./Components/Navbar/Navbar";
 import News from './Components/News/News';
 import { Profile } from "./Components/Profile/Profile";
 import Settings from './Components/Settings/Settings';
+import { AppType } from './Redux/state';
 
-function App() {
+
+
+function App(props: AppType) {
   return (
     <div className={'app-wrapper'}>
       <Header />
       <Navbar />
       <div className="app-wrapper-content">
         <Routes>
-          <Route path={'/profile'} element={<Profile />} />
-          <Route path={'/messages/*'} element={<Conversations />} />
+          <Route path={'/profile'} element={<Profile profile={props.state.profilePage} />} />
+          <Route path={'/messages/*'} element={<Conversations conversations={props.state.conversationPage} />} />
           <Route path={'/news'} element={<News />} />
           <Route path={'/music'} element={<Music />} />
           <Route path={'/settings'} element={<Settings />} />

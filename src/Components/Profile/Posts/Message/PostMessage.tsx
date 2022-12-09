@@ -1,10 +1,6 @@
 import React from "react";
+import { MessagePostType } from "../../../../Redux/state";
 import style from './postmessage.module.css'
-
-type MessagePostType = {
-    message: string
-    likes: number
-}
 
 function PostMessage(props: MessagePostType) {
     return (
