@@ -6,11 +6,12 @@ import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 
 type ProfileType = {
     profile: ProfilePageType
+    addPost: (text: string) => void
 }
 
 export const Profile = (props: ProfileType) => {
     return <div className={style.content}>
         <ProfileInfo />
-        <Posts postData={props.profile.postData} />
+        <Posts data={props.profile} addPost={props.addPost} />
     </div>
 }
