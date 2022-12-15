@@ -5,7 +5,9 @@ import style from './posts.module.css'
 
 type PostsSectionType = {
     data: ProfilePageType
-    addPost: (text: string) => void
+    addPost: () => void
+    newPostText: (newText: string) => void
+    postText: string
 }
 
 
@@ -16,15 +18,20 @@ function Posts(props: PostsSectionType) {
 
     const addPost = () => {
         let text = newPost.current?.value
-        if (text) props.addPost(text)
-        if (newPost.current) newPost.current.value = ''
+        if (text) props.addPost()
+        newPost.current &&  props.newPostText('')
+    }
+
+    const onPostChangeHandler = () => {
+        let text = newPost.current?.value
+        text && props.newPostText(text)
     }
 
     return (
         <div>
             My posts:
             <div>
-                <textarea ref={newPost}></textarea>
+                <textarea onChange={onPostChangeHandler} ref={newPost} value={props.postText} />
                 <button onClick={addPost}>Add post</button>
             </div>
             <div className={style.postBlock}>

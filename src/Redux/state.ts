@@ -1,5 +1,5 @@
-import { reRender } from "../rerender"
-
+let reRender = (state: StateType) => {
+}
 
 // Types:
 export type StateType = {
@@ -9,7 +9,8 @@ export type StateType = {
 
 export type AppType = {
     state: StateType
-    addPost: (text: string) => void
+    addPost: () => void
+    newPostText: (newText: string) => void
 }
 
 export type ConversationPageType = {
@@ -29,6 +30,7 @@ export type MessageItemsType = {
 
 export type ProfilePageType = {
     postData: Array<MessagePostType>
+    postText: string
 }
 
 export type MessagePostType = {
@@ -63,12 +65,21 @@ export let state = {
         postData: [
             {id: 1, message: 'hello world', likes: 15},
             {id: 2, message: 'Aliquid aliquam officia praesentium exercitationem omnis sapiente. A qui laudantium numquam quis doloremque. Voluptas non qui et.', likes: 5},
-        ]
+        ],
+        postText: ''
     }
 }
 
-export const addPost = (postText: string) => {
-    state.profilePage.postData.push({id: 3, message: postText, likes: 0})
-    console.log(state.profilePage.postData);
+export const addPost = () => {
+    state.profilePage.postData.push({id: 3, message: state.profilePage.postText, likes: 0})
     reRender(state)
+}
+
+export const changePostText = (newText: string) => {
+    state.profilePage.postText = newText
+    reRender(state)
+}
+
+export const subscriber = (observer: (state: StateType) => void) => {
+    reRender = observer
 }
