@@ -1,11 +1,10 @@
-// Types:
+// Types: ===============================================================================
 export type StoreType = {
-  _state: StateType;
-  _onChange: (state: StateType) => void;
-  addPost: () => void;
-  changePostText: (newText: string) => void;
-  subscriber: (callback: (state: StateType) => void) => void;
-  getState: () => StateType;
+  _state: StateType
+  _onChange: (state: StateType) => void
+  subscriber: (callback: (state: StateType) => void) => void
+  getState: () => StateType
+  dispatch: (action: any) => void
 };
 
 export type StateType = {
@@ -15,6 +14,7 @@ export type StateType = {
 
 export type AppType = {
   store: StoreType;
+  dispatch: (action: ActionTypes) => void
 };
 
 export type ConversationPageType = {
@@ -43,7 +43,19 @@ export type MessagePostType = {
   likes: number;
 };
 
-// State:
+// Action types
+export type ActionTypes = AddPostActionType | UpdateTextActionType
+
+export type AddPostActionType = {
+    type: 'ADD-POST',
+}
+
+export type UpdateTextActionType = {
+    type: 'UPDATE-NEW-POST-TEXT',
+    newText: string
+}
+
+// State: ===============================================================================
 let store: StoreType = {
   _state: {
     conversationPage: {
@@ -102,24 +114,22 @@ let store: StoreType = {
   _onChange() {
     console.log("Changed")
   },
-  addPost() {
-    this._state.profilePage.postData.push({
-      id: 3,
-      message: this._state.profilePage.postText,
-      likes: 0,
-    });
-    this._onChange(this._state)
-  },
-  changePostText(newText: string) {
-    this._state.profilePage.postText = newText
-    this._onChange(this._state)
-  },
   subscriber(callback) {
     this._onChange = callback
   },
   getState() {
     return this._state
   },
+  dispatch(action: any) {
+    if (action.type === 'ADD-POST'){
+        this._state.profilePage.postText && this._state.profilePage.postData.push({id: 3, message: this._state.profilePage.postText, likes: 0});
+        this._state.profilePage.postText = ''
+        this._onChange(this._state)
+    } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        this._state.profilePage.postText = action.newText
+        this._onChange(this._state)
+    }
+  }
 };
 
 export default store

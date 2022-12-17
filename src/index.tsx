@@ -4,7 +4,7 @@ import App from "./App";
 import store, { StateType } from './Redux/state'
 
 let onChange = (state: StateType) => {
-  ReactDOM.render(<App store={store} />, document.getElementById('root'));
+  ReactDOM.render(<App store={store} dispatch={store.dispatch.bind(store)} />, document.getElementById('root'));
 }
 
 onChange(store.getState())

@@ -1,13 +1,12 @@
 import React, { useRef } from "react";
-import { ProfilePageType } from "../../../Redux/state";
+import { ActionTypes, ProfilePageType } from "../../../Redux/state";
 import PostMessage from "./Message/PostMessage";
 import style from './posts.module.css'
 
 type PostsSectionType = {
     data: ProfilePageType
-    addPost: () => void
-    newPostText: (newText: string) => void
     postText: string
+    dispatch: (action: ActionTypes) => void
 }
 
 
@@ -17,14 +16,12 @@ function Posts(props: PostsSectionType) {
     let newPost = useRef<HTMLTextAreaElement>(null)
 
     const addPost = () => {
-        let text = newPost.current?.value
-        if (text) props.addPost()
-        newPost.current &&  props.newPostText('')
+        props.dispatch({ type: 'ADD-POST' })
     }
 
     const onPostChangeHandler = () => {
         let text = newPost.current?.value
-        text && props.newPostText(text)
+        text && props.dispatch({ type: 'UPDATE-NEW-POST-TEXT', newText: text })
     }
 
     return (

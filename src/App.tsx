@@ -22,7 +22,7 @@ const App: React.FC<AppType> = (props) => {
         <Navbar />
         <div className="app-wrapper-content">
           <Routes>
-            <Route path={'/profile'} element={<Profile profile={state.profilePage} addPost={props.store.addPost.bind(props.store)} newPostText={props.store.changePostText.bind(props.store)} />} />
+            <Route path={'/profile'} element={<Profile profile={state.profilePage} dispatch={props.dispatch.bind(props.store)} />} />
             <Route path={'/messages/*'} element={<Conversations conversations={state.conversationPage} />} />
             <Route path={'/news'} element={<News />} />
             <Route path={'/music'} element={<Music />} />
@@ -34,4 +34,4 @@ const App: React.FC<AppType> = (props) => {
   );
 }
 
-export default App;
+export default App
