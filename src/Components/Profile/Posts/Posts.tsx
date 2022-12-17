@@ -15,11 +15,13 @@ function Posts(props: PostsSectionType) {
     const postsElements = props.data.postData.map(el => <PostMessage id={el.id} message={el.message} likes={el.likes} />)
 
     let newPost = useRef<HTMLTextAreaElement>(null)
+    // let newPost = useRef<HTMLTextAreaElement>(null)
 
     const addPost = () => {
-        let text = newPost.current?.value
-        if (text) props.addPost()
-        newPost.current &&  props.newPostText('')
+        // let text = newPost.current?.value
+        // if (text) props.addPost(text)
+        // newPost.current &&  props.newPostText('')
+        props.addPost()
     }
 
     const onPostChangeHandler = () => {

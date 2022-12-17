@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import Conversations from './Components/Conversations/Conversations';
 import Header from "./Components/Header/Header";
@@ -12,21 +12,25 @@ import { AppType } from './Redux/state';
 
 
 
-function App(props: AppType) {
+const App: React.FC<AppType> = (props) => {
+  const state = props.store.getState()
+
   return (
-    <div className={'app-wrapper'}>
-      <Header />
-      <Navbar />
-      <div className="app-wrapper-content">
-        <Routes>
-          <Route path={'/profile'} element={<Profile profile={props.state.profilePage} addPost={props.addPost} newPostText={props.newPostText} />} />
-          <Route path={'/messages/*'} element={<Conversations conversations={props.state.conversationPage} />} />
-          <Route path={'/news'} element={<News />} />
-          <Route path={'/music'} element={<Music />} />
-          <Route path={'/settings'} element={<Settings />} />
-        </Routes>
+    <BrowserRouter>
+      <div className={'app-wrapper'}>
+        <Header />
+        <Navbar />
+        <div className="app-wrapper-content">
+          <Routes>
+            <Route path={'/profile'} element={<Profile profile={state.profilePage} addPost={props.store.addPost.bind(props.store)} newPostText={props.store.changePostText.bind(props.store)} />} />
+            <Route path={'/messages/*'} element={<Conversations conversations={state.conversationPage} />} />
+            <Route path={'/news'} element={<News />} />
+            <Route path={'/music'} element={<Music />} />
+            <Route path={'/settings'} element={<Settings />} />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 
