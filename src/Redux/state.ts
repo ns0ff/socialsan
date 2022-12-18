@@ -8,52 +8,69 @@ export type StoreType = {
 };
 
 export type StateType = {
-  conversationPage: ConversationPageType;
-  profilePage: ProfilePageType;
+  conversationPage: ConversationPageType
+  profilePage: ProfilePageType
 };
 
 export type AppType = {
-  store: StoreType;
+  store: StoreType
   dispatch: (action: ActionTypes) => void
 };
 
 export type ConversationPageType = {
-  conversationsData: Array<ConversationsItemsType>;
-  messageData: Array<MessageItemsType>;
+  conversationsData: Array<ConversationsItemsType>
+  messageData: Array<MessageItemsType>
+  newMessageBody: string
 };
 
 export type ConversationsItemsType = {
-  id: number;
-  name: string;
+  id: number
+  name: string
 };
 
 export type MessageItemsType = {
-  id: number;
-  message: string;
+  id: number
+  message: string
 };
 
 export type ProfilePageType = {
-  postData: Array<MessagePostType>;
-  postText: string;
+  postData: Array<MessagePostType>
+  postText: string
 };
 
 export type MessagePostType = {
-  id: number;
-  message: string;
-  likes: number;
+  id: number
+  message: string
+  likes: number
 };
 
 // Action types
-export type ActionTypes = AddPostActionType | UpdateTextActionType
+export type ActionTypes = AddPostActionType | UpdateTextActionType | AddMessageActionType | UpdateMessageTextActionType
 
 export type AddPostActionType = {
-    type: 'ADD-POST',
+    type: 'ADD-POST'
 }
 
 export type UpdateTextActionType = {
     type: 'UPDATE-NEW-POST-TEXT',
     newText: string
 }
+
+export type AddMessageActionType = {
+    type: 'ADD-MESSAGE'
+}
+
+export type UpdateMessageTextActionType = {
+    type: 'UPDATE-NEW-MESSAGE-TEXT',
+    newMessageText: string
+}
+
+// Action Creators ======================================================================
+export let addPostAC = (): AddPostActionType => ({ type: 'ADD-POST' })
+export let updatePostTextAC = (text: string): UpdateTextActionType => ({ type: 'UPDATE-NEW-POST-TEXT', newText: text })
+export let addMessageAC = (): AddMessageActionType => ({ type: 'ADD-MESSAGE' })
+export let updateMessageTextAC = (newMessageText: string): UpdateMessageTextActionType => ({ type: 'UPDATE-NEW-MESSAGE-TEXT', newMessageText: newMessageText })
+
 
 // State: ===============================================================================
 let store: StoreType = {
@@ -97,6 +114,7 @@ let store: StoreType = {
             "Praesentium aut autem saepe tempore molestiae. Ut sed non eum porro in voluptate assumenda. Sit est illo consequatur.",
         },
       ],
+      newMessageBody: ""
     },
     profilePage: {
       postData: [
@@ -127,6 +145,13 @@ let store: StoreType = {
         this._onChange(this._state)
     } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
         this._state.profilePage.postText = action.newText
+        this._onChange(this._state)
+    } else if (action.type === 'ADD-MESSAGE'){
+        this._state.conversationPage.newMessageBody && this._state.conversationPage.messageData.push({id: 3, message: this._state.conversationPage.newMessageBody});
+        this._state.conversationPage.newMessageBody = ''
+        this._onChange(this._state)
+    } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+        this._state.conversationPage.newMessageBody = action.newMessageText
         this._onChange(this._state)
     }
   }

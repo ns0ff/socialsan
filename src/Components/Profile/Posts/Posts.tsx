@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { ActionTypes, AddPostActionType, ProfilePageType, UpdateTextActionType } from "../../../Redux/state";
+import { ActionTypes, addPostAC, AddPostActionType, ProfilePageType, updatePostTextAC, UpdateTextActionType } from "../../../Redux/state";
 import PostMessage from "./Message/PostMessage";
 import style from './posts.module.css'
 
@@ -8,9 +8,6 @@ type PostsSectionType = {
     postText: string
     dispatch: (action: ActionTypes) => void
 }
-
-let addPostAC = (): AddPostActionType => ({ type: 'ADD-POST' })
-let updatePostTextAC = (text: string): UpdateTextActionType => ({ type: 'UPDATE-NEW-POST-TEXT', newText: text })
 
 function Posts(props: PostsSectionType) {
     const postsElements = props.data.postData.map(el => <PostMessage id={el.id} message={el.message} likes={el.likes} />)
