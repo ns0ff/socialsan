@@ -1,3 +1,6 @@
+import conversationsReducer from "./conversations-reducer";
+import profileReducer from "./profile-reducer";
+
 // Types: ===============================================================================
 export type StoreType = {
   _state: StateType
@@ -139,21 +142,9 @@ let store: StoreType = {
     return this._state
   },
   dispatch(action: any) {
-    if (action.type === 'ADD-POST'){
-        this._state.profilePage.postText && this._state.profilePage.postData.push({id: 3, message: this._state.profilePage.postText, likes: 0});
-        this._state.profilePage.postText = ''
-        this._onChange(this._state)
-    } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-        this._state.profilePage.postText = action.newText
-        this._onChange(this._state)
-    } else if (action.type === 'ADD-MESSAGE'){
-        this._state.conversationPage.newMessageBody && this._state.conversationPage.messageData.push({id: 3, message: this._state.conversationPage.newMessageBody});
-        this._state.conversationPage.newMessageBody = ''
-        this._onChange(this._state)
-    } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-        this._state.conversationPage.newMessageBody = action.newMessageText
-        this._onChange(this._state)
-    }
+    this._state.conversationPage = conversationsReducer(this._state.conversationPage, action)
+    this._state.profilePage = profileReducer(this._state.profilePage, action)
+    this._onChange(this._state)
   }
 };
 
