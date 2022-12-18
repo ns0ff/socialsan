@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { ActionTypes, ProfilePageType } from "../../../Redux/state";
+import { ActionTypes, AddPostActionType, ProfilePageType, UpdateTextActionType } from "../../../Redux/state";
 import PostMessage from "./Message/PostMessage";
 import style from './posts.module.css'
 
@@ -9,6 +9,8 @@ type PostsSectionType = {
     dispatch: (action: ActionTypes) => void
 }
 
+let addPostAC = (): AddPostActionType => ({ type: 'ADD-POST' })
+let updatePostTextAC = (text: string): UpdateTextActionType => ({ type: 'UPDATE-NEW-POST-TEXT', newText: text })
 
 function Posts(props: PostsSectionType) {
     const postsElements = props.data.postData.map(el => <PostMessage id={el.id} message={el.message} likes={el.likes} />)
@@ -16,12 +18,12 @@ function Posts(props: PostsSectionType) {
     let newPost = useRef<HTMLTextAreaElement>(null)
 
     const addPost = () => {
-        props.dispatch({ type: 'ADD-POST' })
+        props.dispatch(addPostAC())
     }
 
     const onPostChangeHandler = () => {
         let text = newPost.current?.value
-        text && props.dispatch({ type: 'UPDATE-NEW-POST-TEXT', newText: text })
+        text && props.dispatch(updatePostTextAC(text))
     }
 
     return (
